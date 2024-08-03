@@ -1,0 +1,44 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 34
+    namespace = "com.bda.myapplication.parselib"
+
+    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion 34
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        defaultConfig {
+            externalNativeBuild {
+                cmake {
+                    arguments "-DANDROID_STL=c++_shared"
+                }
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt')
+        }
+    }
+
+    buildFeatures {
+        prefab true
+    }
+
+    externalNativeBuild {
+        cmake {
+            path 'src/main/cpp/CMakeLists.txt'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'com.google.oboe:oboe:1.9.0'
+}

@@ -1,0 +1,2 @@
+com.bda.myapplication.parselib
+string app_name
